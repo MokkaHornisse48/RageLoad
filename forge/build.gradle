@@ -1,0 +1,66 @@
+plugins {
+    id 'multiloader-loader'
+    id 'net.neoforged.moddev.legacyforge'
+}
+
+mixin {
+    add(sourceSets.main, "${mod_id}.refmap.json")
+
+    config("${mod_id}.mixins.json")
+    config("${mod_id}.forge.mixins.json")
+}
+
+legacyForge {
+    version = "${minecraft_version}-${forge_version}"
+
+
+    def at = project(':common').file('src/main/resources/META-INF/accesstransformer.cfg')
+    if (at.exists()) {
+        accessTransformers = [project(':common').file('src/main/resources/META-INF/accesstransformer.cfg')]
+    }
+    parchment {
+        minecraftVersion = parchment_minecraft
+        mappingsVersion = parchment_version
+    }
+    runs {
+        client {
+            client()
+            gameDirectory = project.file("run/client") // Changes the folder to /run/client
+            programArguments.addAll "--username=Atronix"
+        }
+        data {
+            data()
+            programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+        }
+        server {
+            server()
+            gameDirectory = project.file("run/server") // Changes the folder to /run/server
+            programArguments.addAll "--nogui"
+        }
+    }
+
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+sourceSets.main.resources.srcDir 'src/generated/resources'
+
+dependencies {
+    compileOnly project(":common")
+    annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
+
+    modCompileOnly "maven.modrinth:lWDHr9jE:KLmvRxwh"//Tectonic
+    modCompileOnly "maven.modrinth:XaDC71GB:srPoHKt8"//Lithostitched
+    modCompileOnly "maven.modrinth:NTi7d3Xc:8L5cwpjz"//Oh The Biomes We've Gone
+    modCompileOnly "maven.modrinth:kkmrDlKT:zGconCHG"//TerraBlender
+}
+
+jar {
+    finalizedBy('reobfJar')
+    manifest.attributes([
+            "MixinConfigs": "${mod_id}.mixins.json,${mod_id}.forge.mixins.json"
+    ])
+}

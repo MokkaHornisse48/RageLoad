@@ -1,0 +1,66 @@
+plugins {
+    id 'multiloader-loader'
+    id 'fabric-loom'
+}
+
+repositories {
+    maven {
+        url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+        content {
+            includeGroup "com.eliotlash.mclib"
+        }
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${minecraft_version}"
+    mappings loom.layered {
+        officialMojangMappings()
+        parchment("org.parchmentmc.data:parchment-${parchment_minecraft}:${parchment_version}@zip")
+    }
+    modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
+    implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
+    implementation project(":common")
+
+    modImplementation "maven.modrinth:NTi7d3Xc:nTgMZTl1"//Oh The Biomes We've Gone
+    modImplementation "maven.modrinth:tectonic:3.0.17"
+    modImplementation "maven.modrinth:lithostitched:1.4.11-fabric-1.20"
+
+    modImplementation "maven.modrinth:terrablender:J1S3aA8i"
+    modImplementation "maven.modrinth:corgilib:1.20.1-4.0.3.4-fabric"
+    modImplementation "maven.modrinth:oh-the-trees-youll-grow:1.20.1-1.6.0-Fabric"
+    modImplementation "maven.modrinth:geckolib:PdrSPr53"
+    implementation("com.electronwill.night-config:toml:3.6.7")
+    implementation("com.electronwill.night-config:core:3.6.7")
+    implementation("com.eliotlash.mclib:mclib:20")
+
+    modImplementation "maven.modrinth:fXbvd6mf:XqTNiiKd"//Cyanide
+
+    modImplementation "maven.modrinth:gvQqBUqZ:iEcXOkz4"//Lithium
+    modImplementation "maven.modrinth:KuNKN7d2:erSJnRcq"//Noisium
+}
+
+loom {
+    if (project(":common").file("src/main/resources/${mod_id}.accesswidener").exists()) {
+        accessWidenerPath.set(project(":common").file("src/main/resources/${mod_id}.accesswidener"))
+    }
+    mixin {
+        defaultRefmapName.set("${mod_id}.refmap.json")
+    }
+    runs {
+        client {
+            client()
+            setConfigName("Fabric Client")
+            ideConfigGenerated(true)
+            runDir("run/client")
+            programArg "--username=Atronix"
+        }
+        server {
+            server()
+            setConfigName("Fabric Server")
+            ideConfigGenerated(true)
+            runDir("run/server")
+        }
+    }
+}

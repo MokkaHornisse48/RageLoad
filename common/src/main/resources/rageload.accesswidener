@@ -1,0 +1,15 @@
+accessWidener v2 named
+
+accessible class net/minecraft/client/multiplayer/ClientChunkCache$Storage
+accessible method net/minecraft/world/level/storage/LevelStorageSource$LevelStorageAccess <init> (Lnet/minecraft/world/level/storage/LevelStorageSource;Ljava/lang/String;Ljava/nio/file/Path;)V
+accessible method net/minecraft/core/HolderSet$Named bind (Ljava/util/List;)V
+accessible method net/minecraft/core/Holder$Reference bindValue (Ljava/lang/Object;)V
+
+accessible class  net/minecraft/world/level/levelgen/structure/templatesystem/StructureTemplateManager$Source
+
+accessible class net/minecraft/world/level/levelgen/DensityFunctions$Marker
+accessible class net/minecraft/world/level/levelgen/DensityFunctions$Marker$Type
+
+accessible class net/minecraft/world/level/levelgen/SurfaceRules$Context
+accessible class net/minecraft/world/level/levelgen/SurfaceRules$Condition
+accessible class net/minecraft/world/level/levelgen/SurfaceRules$SurfaceRule

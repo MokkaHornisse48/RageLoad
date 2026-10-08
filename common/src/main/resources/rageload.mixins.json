@@ -1,0 +1,50 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "mod.mh48.rageload.mixin",
+  "refmap": "${mod_id}.refmap.json",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "debug.MultiNoiseBiomeSourceAccessor",
+    "net.MinecraftServerMixin",
+    "net.ServerGamePacketListenerImplMixin",
+    "server.ChunkMapAccessor",
+    "server.MinecraftServerAccessor",
+    "server.RegistryFileCodecMixin",
+    "server.RegistryOpsMixin"
+  ],
+  "client": [
+    "client.ClientboundLoginPacketMixin",
+    "client.ClientChunkCacheMixin",
+    "client.ClientChunkCacheStorageAccessor",
+    "client.ClientLevelAccessor",
+    "client.ClientLevelMixin",
+    "client.ClientPacketListenerMixin",
+    "client.MinecraftMixin",
+    "client.OptionsMixin",
+    "debug.DebugScreenOverlayMixin",
+    "debug.ProtoChunkClientPerformanceLoggerMixin",
+    "gen.LevelChunkMixin",
+    "gen.ProtoChunkMixin",
+    "gen.fakedata.ChunkMapAccessor",
+    "gen.fakedata.HolderReferenceMixin",
+    "gen.fakedata.HolderSetNamedAccessor",
+    "gen.fakedata.MinecraftServerAccessor",
+    "gen.fakedata.MixinCommandSelection",
+    "gen.fakedata.MixinReloadableServerResources",
+    "gen.fakedata.ServerChunkCacheMixin",
+    "gen.fakedata.StructureTemplateManagerMixin",
+    "gen.fast.BiomeConditionSourceMixin",
+    "gen.fast.NamespacedSurfaceRuleSourceMixin",
+    "gen.fast.SurfaceRulesAccess",
+    "gen.fast.SurfaceRulesContextMixin",
+    "gen.fast.BiomeManagerMixin",
+    "net.ClientPacketListenerMixin"
+  ],
+  "server": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
+
